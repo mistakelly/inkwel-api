@@ -32,7 +32,7 @@ export const databaseConfig = (
     database: databaseName,
     entities: [entitiesPath],
     synchronize: true,
-    logging: false,
+    logging: true,
     ssl: configService.get<boolean>('DATABASE_SSL_ENABLED') ? true : false,
     extra: extra,
     migrations: ['migration/*.js'],
