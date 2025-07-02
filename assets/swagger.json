@@ -23,7 +23,11 @@
           "200": {
             "description": "",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
             }
           }
         },
@@ -124,6 +128,137 @@
         ],
         "x-samchon-controller": "AuthController"
       }
+    },
+    "/post": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostDto.CreatePostDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDto.Root"
+                }
+              }
+            }
+          }
+        },
+        "x-samchon-accessor": [
+          "post",
+          "create"
+        ],
+        "x-samchon-controller": "postController"
+      }
+    },
+    "/post/{postId}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDto.Root"
+                }
+              }
+            }
+          }
+        },
+        "x-samchon-accessor": [
+          "post",
+          "findOne"
+        ],
+        "x-samchon-controller": "postController"
+      },
+      "patch": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostDto.UpdatePostDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDto.Root"
+                }
+              }
+            }
+          }
+        },
+        "x-samchon-accessor": [
+          "post",
+          "update"
+        ],
+        "x-samchon-controller": "postController"
+      },
+      "delete": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-samchon-accessor": [
+          "post",
+          "$delete"
+        ],
+        "x-samchon-controller": "postController"
+      }
     }
   },
   "components": {
@@ -211,12 +346,59 @@
           "phone",
           "password"
         ]
-      }
-    },
-    "securitySchemes": {
-      "bearer": {
-        "type": "http",
-        "scheme": "bearer"
+      },
+      "PostDto.Root": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "author": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "username"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "content",
+          "author"
+        ]
+      },
+      "PostDto.CreatePostDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content"
+        ]
+      },
+      "PostDto.UpdatePostDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content"
+        ]
       }
     }
   },

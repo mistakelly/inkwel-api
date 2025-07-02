@@ -14,12 +14,12 @@ const NESTIA_CONFIG: INestiaConfig = {
   swagger: {
     output: 'assets/swagger.json',
     beautify: true,
-    security: {
-      bearer: {
-        type: 'http',
-        scheme: 'bearer',
-      },
-    },
+    // security: {
+    //   bearer: {
+    //     type: 'http',
+    //     scheme: 'bearer',
+    //   },
+    // },
     servers: [
       {
         url: 'http://localhost:3000/api/',

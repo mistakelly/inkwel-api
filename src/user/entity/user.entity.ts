@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/common/entity/base.entity';
-import { Column, Entity } from 'typeorm';
+import { PostEntity } from 'src/post/entity/post.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 export enum AuthType {
   UsernameAndPassword = 'Username_Password',
@@ -22,6 +23,9 @@ export class UserEntity extends BaseEntity {
 
   @Column({ nullable: true })
   password: string;
+
+  @OneToMany(() => PostEntity, (stories) => stories.author)
+  stories: PostEntity[];
 
   // @Column()
   // authType: AuthType;
