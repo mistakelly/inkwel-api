@@ -19,17 +19,7 @@ export namespace PostDto {
     }
   }
 
-  export const createDtoFromEntity = (entity: PostEntity) => {
-    const dto = new Root();
-    dto.id = entity.id;
-    dto.content = entity.content;
-    dto.author = {
-      id: entity.author.id,
-      username: entity.author.username,
-    };
-
-    return dto;
-  };
+ 
 
   export type CreatePostDto = {
     content: string;

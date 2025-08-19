@@ -48,32 +48,5 @@ export class PostService {
     return post;
   }
 
-  async update(userId: string, postId: string, dto: PostDto.UpdatePostDto) {
-    const user = await this.userService.findUser(userId);
 
-    if (!user) {
-      throw new NotFoundException(`User with id ${userId} not found`);
-    }
-
-    const post = await this.findOne(userId, postId);
-
-
-    post.content = dto.content;
-
-    return await this.postRepo.save(post);
-  }
-
-  async delete(userId: string, postId: string) {
-    const user = await this.userService.findUser(userId);
-
-    if (!user) {
-      throw new NotFoundException(`User with id ${userId} not found`);
-    }
-
-    const post = await this.findOne(userId, postId);
-
-
-    await this.postRepo.delete(post.id)
-
-  }
 }
